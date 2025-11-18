@@ -1,5 +1,6 @@
 package com.swe.networking;
 
+import com.swe.core.ClientNode;
 import java.nio.channels.SocketChannel;
 
 /**

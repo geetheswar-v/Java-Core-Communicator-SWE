@@ -1,5 +1,7 @@
 package com.swe.networking;
 
+import com.swe.core.ClientNode;
+
 /**
  * Common interface to be used by client and server.
  */

@@ -11,7 +11,7 @@ import com.swe.ScreenNVideo.Serializer.NetworkPacketType;
 import com.swe.ScreenNVideo.Serializer.NetworkSerializer;
 import com.swe.core.ClientNode;
 import com.swe.networking.ModuleType;
-import com.swe.networking.AbstractNetworking;
+import com.swe.networking.SimpleNetworking.AbstractNetworking;
 
 import java.awt.image.BufferedImage;
 
@@ -236,7 +236,7 @@ public class CaptureComponents {
 
             // Get IP address as string
             final byte[] subscribeData = NetworkSerializer.serializeIP(NetworkPacketType.SUBSCRIBE_AS_VIEWER, localIp);
-            networking.sendData(subscribeData, new ClientNode[] {destNode}, ModuleType.SCREENSHARING.ordinal(), 2);
+            networking.sendData(subscribeData, new ClientNode[] {destNode}, ModuleType.SCREENSHARING, 2);
 
             final byte[] res = new byte[1];
             res[0] = 1;

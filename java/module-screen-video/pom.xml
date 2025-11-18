@@ -110,6 +110,12 @@
                     <target>24</target>
                     <compilerArgs>--enable-preview</compilerArgs>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>default-testCompile</id>
+                        <phase>none</phase>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.openjfx</groupId>

@@ -38,6 +38,12 @@
                      <source>24</source>
                      <target>24</target>
                  </configuration>
+                 <executions>
+                     <execution>
+                         <id>default-testCompile</id>
+                         <phase>none</phase>
+                     </execution>
+                 </executions>
              </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
