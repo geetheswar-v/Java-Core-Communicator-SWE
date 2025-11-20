@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Vector;
 
-import com.swe.core.RPCinteface.AbstractRPC;
+import com.swe.core.RPCinterface.AbstractRPC;
 
 /**
  * The main class of the networking module.

@@ -46,25 +46,7 @@ public class NetworkingAdapter implements NetworkingInterface {
 
     @Override
     public void consumeRPC(AbstractRPC rpc) {
-        // Convert RPCinterface.AbstractRPC to RPCinteface.AbstractRPC
-        // Create an adapter wrapper since they're in different packages
-        com.swe.core.RPCinteface.AbstractRPC adaptedRpc = new com.swe.core.RPCinteface.AbstractRPC() {
-            @Override
-            public void subscribe(String methodName, java.util.function.Function<byte[], byte[]> method) {
-                rpc.subscribe(methodName, method);
-            }
-
-            @Override
-            public Thread connect(int portNumber) throws java.io.IOException, java.util.concurrent.ExecutionException, InterruptedException {
-                return rpc.connect(portNumber);
-            }
-
-            @Override
-            public java.util.concurrent.CompletableFuture<byte[]> call(String methodName, byte[] data) {
-                return rpc.call(methodName, data);
-            }
-        };
-        networking.consumeRPC(adaptedRpc);
+        networking.consumeRPC(rpc);
     }
 }
 

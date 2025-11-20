@@ -13,7 +13,7 @@ import com.swe.ScreenNVideo.Serializer.NetworkSerializer;
 import com.swe.ScreenNVideo.Serializer.RImage;
 import com.swe.ScreenNVideo.Synchronizer.FeedData;
 import com.swe.ScreenNVideo.Synchronizer.ImageSynchronizer;
-import com.swe.networking.SimpleNetworking.AbstractNetworking;
+import com.swe.networking.AbstractNetworking;
 import com.swe.core.ClientNode;
 import com.swe.networking.MessageListener;
 import com.swe.networking.ModuleType;

@@ -1,7 +1,7 @@
 package com.swe.networking;
 
 import com.swe.core.ClientNode;
-import com.swe.core.RPCinteface.AbstractRPC;
+import com.swe.core.RPCinterface.AbstractRPC;
 
 /**
  * The interface between the controller and networking modules.
