@@ -134,6 +134,17 @@ public class NetworkRPC {
         final int module = buffer.getInt();
         final int priority = buffer.getInt();
         networking.broadcast(data, module, priority);
+
+        // Also broadcast via RPC to ensure .NET clients receive it
+        final int bufferSize = data.length + Integer.BYTES;
+        final ByteBuffer callBuffer = ByteBuffer.allocate(bufferSize);
+        callBuffer.putInt(module);
+        callBuffer.put(data);
+        final AbstractRPC rpc = networking.getRPC();
+        if (rpc != null) {
+            rpc.call("networkFrontCallSubscriber", callBuffer.array());
+        }
+
         return null;
     }
 
@@ -164,6 +175,19 @@ public class NetworkRPC {
         final int priority = buffer.getInt();
 
         networking.sendData(data, dest, module, priority);
+
+        // Also broadcast via RPC to ensure .NET clients receive it
+        // Note: This turns unicast into broadcast for RPC clients, but it's necessary
+        // because we can't easily target specific RPC clients from here.
+        final int bufferSize = data.length + Integer.BYTES;
+        final ByteBuffer callBuffer = ByteBuffer.allocate(bufferSize);
+        callBuffer.putInt(module);
+        callBuffer.put(data);
+        final AbstractRPC rpc = networking.getRPC();
+        if (rpc != null) {
+            rpc.call("networkFrontCallSubscriber", callBuffer.array());
+        }
+
         return null;
     }
 
