@@ -43,7 +43,7 @@ public class Init {
         MeetingNetworkingCoordinator.initialize(networking);
 
         new ChatManager(Networking.getNetwork());
-        new CanvasManager(Networking.getNetwork(), Utils.getLocalClientNode());
+        controllerServices.canvasManager = new CanvasManager(Networking.getNetwork(), Utils.getLocalClientNode());
 
         MediaCaptureManager mediaCaptureManager = new MediaCaptureManager(Networking.getNetwork(), 6943);
         Thread mediaCaptureManagerThread = new Thread(() -> {
@@ -98,6 +98,9 @@ public class Init {
                 final ClientNode localClientNode = Utils.getLocalClientNode();
                 Utils.setServerClientNode(meetingSession.getMeetingId(), controllerServices.cloud);
                 controllerServices.networking.addUser(localClientNode, localClientNode);
+                
+                // Update CanvasManager with local node as host
+                controllerServices.canvasManager.setHostClientNode(localClientNode);
 
                 MeetingNetworkingCoordinator.handleMeetingCreated(meetingSession);
             } catch (Exception e) {
@@ -133,6 +136,10 @@ public class Init {
                 System.out.println("Server client node: " + serverClientNode);
 
                 controllerServices.networking.addUser(localClientNode, serverClientNode);
+                
+                // Update CanvasManager with server node as host
+                controllerServices.canvasManager.setHostClientNode(serverClientNode);
+                
                 MeetingNetworkingCoordinator.handleMeetingJoin(id, serverClientNode);
             } catch (Exception e) {
                 System.out.println("Error getting server client node: " + e.getMessage());

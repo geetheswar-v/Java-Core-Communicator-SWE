@@ -84,4 +84,9 @@ public class CanvasManager {
         return hostString.getBytes(StandardCharsets.UTF_8);
     }
 
+    public void setHostClientNode(ClientNode hostClientNode) {
+        this.hostClientNode = hostClientNode;
+        System.out.println("[CanvasManager] Host client node updated to: " + serializeHost(hostClientNode));
+    }
+
 }
