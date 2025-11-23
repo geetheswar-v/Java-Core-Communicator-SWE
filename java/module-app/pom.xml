@@ -43,6 +43,11 @@
           <artifactId>module-screen-video</artifactId>
           <version>${project.version}</version>
       </dependency>
+    <dependency>
+      <groupId>com.swe.canvas</groupId>
+      <artifactId>module-canvas</artifactId>
+      <version>${project.version}</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>

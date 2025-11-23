@@ -13,6 +13,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.swe.networking.Networking;
 import com.swe.aiinsights.aiinstance.AiInstance;
+import com.swe.aiinsights.apiendpoints.AiClientService;
+import java.util.concurrent.CompletableFuture;
 
 
 /**
@@ -35,7 +37,7 @@ public class CanvasManager {
     private final Networking network;
     private ClientNode hostClientNode;
 
-    private AiInstance aiInstance;
+    private AiClientService aiInstance;
 
     public CanvasManager(Networking network, ClientNode hostClientNode) {
         // Constructor implementation (if needed)
@@ -55,30 +57,19 @@ public class CanvasManager {
     private byte[] handleRegularize(byte[] data) {
         // byte is the serialized action
 
-        String json = data.toString();
-        CompletableFuture<String> resp = aiInstance.regularize(json);
+        String json = new String(data, StandardCharsets.UTF_8);
+        CompletableFuture<String> resp = aiInstance.regularise(json);
         
-        byte[] result = new byte[0];
-
-        // what you want to do here
-        resp.thenAccept(response -> {
-            result = response.getBytes();
-        }).join();
-
-        return result;
+        String response = resp.join();
+        return response.getBytes(StandardCharsets.UTF_8);
     }
 
     private byte[] handleDescribe(byte[] data) {
-        String path = data.toString();
+        String path = new String(data, StandardCharsets.UTF_8);
         CompletableFuture<String> resp = aiInstance.describe(path);
 
-        byte[] result = new byte[0];
-        resp.thenAccept(response -> {
-            // func to send back to frontend
-            result = response.getBytes();
-        }).join();
-
-        return result;
+        String response = resp.join();
+        return response.getBytes(StandardCharsets.UTF_8);
     }
 
 
@@ -87,7 +78,9 @@ public class CanvasManager {
     }
 
     private byte[] handleGetHostIp(byte[] data) {
+        System.out.println("[CanvasManager] handleGetHostIp called");
         String hostString = serializeHost(this.hostClientNode);
+        System.out.println("[CanvasManager] Returning host IP: " + hostString);
         return hostString.getBytes(StandardCharsets.UTF_8);
     }
 

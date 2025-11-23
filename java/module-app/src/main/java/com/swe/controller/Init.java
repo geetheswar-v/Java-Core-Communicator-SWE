@@ -2,6 +2,7 @@ package com.swe.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.swe.ScreenNVideo.MediaCaptureManager;
+import com.swe.canvas.CanvasManager;
 import com.swe.chat.ChatManager;
 import com.swe.core.Auth.AuthService;
 import com.swe.core.ClientNode;
@@ -42,6 +43,7 @@ public class Init {
         MeetingNetworkingCoordinator.initialize(networking);
 
         new ChatManager(Networking.getNetwork());
+        new CanvasManager(Networking.getNetwork(), Utils.getLocalClientNode());
 
         MediaCaptureManager mediaCaptureManager = new MediaCaptureManager(Networking.getNetwork(), 6943);
         Thread mediaCaptureManagerThread = new Thread(() -> {

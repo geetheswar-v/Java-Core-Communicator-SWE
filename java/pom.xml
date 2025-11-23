@@ -26,6 +26,7 @@
     <module>module-cloud</module>
     <module>module-core</module>
     <module>module-app</module>
+    <module>module-canvas</module>
     <module>module-integration-tests</module>
   </modules>
 
